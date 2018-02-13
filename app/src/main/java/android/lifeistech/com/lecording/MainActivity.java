@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,12 +36,17 @@ public class MainActivity extends AppCompatActivity {
     long length;
 
     boolean isCheck = false;
+    ImageButton sleep;
+    TextView getUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         realm = Realm.getDefaultInstance();
+        sleep = (ImageButton)findViewById(R.id.sleep);
+        getUp = (TextView) findViewById(R.id.getUp);
+        sleep.setBackgroundResource(R.drawable.round_button);
     }
 
     public void save(final int startYear, final int startMonth, final int startDay, final int startHour, final int startMinute, final int endYear, final int endMonth, final int endDay, final int endHour, final int endMinute,final String subject, final long length) {
@@ -70,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar1 = new GregorianCalendar();
         Calendar calendar2 = new GregorianCalendar();
 
-        if(isCheck = true){
+    if(isCheck){
+        
+            sleep.setBackgroundResource(R.drawable.round_button2);
+            getUp.setText("寝る");
             subject = "sleeping";
             startYear = getYear(date);
             startMonth = getMonth(date);
@@ -80,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             calendar1 = new GregorianCalendar(startYear, startMonth, startDay,startHour, startMinute);
 
         }else {
+            sleep.setBackgroundResource(R.drawable.round_button);
+            getUp.setText("起きる");
             endYear = getYear(date);
             endMonth = getMonth(date);
             endDay = getDay(date);
@@ -90,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
             long time1 = calendar1.getTimeInMillis();
             long time2 = calendar2.getTimeInMillis();
-            length = (time2 - time1) / 1000 * 60;
+            length = (time2 - time1) / 1000 / 60;
 
             save(startYear, startMonth, startDay, startHour, startMinute,endYear,endMonth,endDay,endHour,endMinute, subject,length);
             finish();

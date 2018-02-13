@@ -35,17 +35,17 @@
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/sleep"
                     android:layout_weight="1"
                     android:onClick="getUp"
-                    android:background="@drawable/round_button"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="10dp"
+                    android:background="#ffffffff"/>
 
                 <TextView
                     android:text="起きる"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView3"
+                    android:id="@+id/getUp"
                     android:layout_weight="1"
                     android:gravity="center" />
             </LinearLayout>
@@ -62,7 +62,6 @@
                     android:id="@+id/imageButton3"
                     android:layout_weight="1"
                     android:onClick="sleep"
-                    android:background="@drawable/round_button"
                     android:layout_margin="10dp" />
 
                 <TextView
