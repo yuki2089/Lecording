@@ -8,11 +8,13 @@ import android.view.View;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+import static android.R.attr.endY;
 import static android.R.attr.startYear;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     int endHour;
     int endMinute;
     String subject;
-
+    long length;
 
     boolean isCheck = false;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
     }
 
-    public void save(final int startYear, final int startMonth, final int startDay, final int startHour, final int startMinute, final int endYear, final int endMonth, final int endDay, final int endHour, final int endMinute,final  String subject) {
+    public void save(final int startYear, final int startMonth, final int startDay, final int startHour, final int startMinute, final int endYear, final int endMonth, final int endDay, final int endHour, final int endMinute,final String subject, final long length) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm beRealm) {
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 timeRecord.endHour = endHour;
                 timeRecord.endMinute = endMinute;
                 timeRecord.subject = subject;
+                timeRecord.length=length;
 
             }
         });
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     public void getUp(View v) {
         isCheck = !isCheck;
         Date date  = new Date();
+        Calendar calendar1 = new GregorianCalendar();
+        Calendar calendar2 = new GregorianCalendar();
 
         if(isCheck = true){
             subject = "sleeping";
@@ -72,14 +77,25 @@ public class MainActivity extends AppCompatActivity {
             startDay = getDay(date);
             startHour = getHour(date);
             startMinute = getMinute(date);
+            calendar1 = new GregorianCalendar(startYear, startMonth, startDay,startHour, startMinute);
+
         }else {
             endYear = getYear(date);
             endMonth = getMonth(date);
             endDay = getDay(date);
             endHour = getHour(date);
             endMinute = getMinute(date);
-            save(startYear, startMonth, startDay, startHour, startMinute,endYear,endMonth,endDay,endHour,endMinute, subject);
+            calendar2 = new GregorianCalendar(endYear, endMonth,endDay,endHour,endMinute);
+
+
+            long time1 = calendar1.getTimeInMillis();
+            long time2 = calendar2.getTimeInMillis();
+            length = (time2 - time1) / 1000 * 60;
+
+            save(startYear, startMonth, startDay, startHour, startMinute,endYear,endMonth,endDay,endHour,endMinute, subject,length);
             finish();
+
+
         }
 
     }
@@ -124,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         int minute = Integer.parseInt(sdf.format(date));
         return minute;
     }
+
+
 
 
 

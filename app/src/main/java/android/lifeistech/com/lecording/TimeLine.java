@@ -22,13 +22,8 @@ public class TimeLine extends AppCompatActivity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.HORIZONTAL);
 
-        TextView scheduleNameTv = new TextView(this);
-        scheduleNameTv.setText(time.schedule);
+        ImageView imageView = new ImageView(this);
 
-        TextView timeTv = new TextView(this);
-        timeTv.setText(time.time);
-
-        ImageView length = new ImageView(this);
 
     }
 }

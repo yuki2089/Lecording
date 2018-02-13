@@ -5,12 +5,10 @@ package android.lifeistech.com.lecording;
  */
 
 public class Time {
-    String schedule;
     String time;
     int length;
 
-    Time(String schedule, String time, int length) {
-        this.schedule = schedule;
+    Time(String time, int length) {
         this.time = time;
         this.length = length;
     }

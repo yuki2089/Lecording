@@ -22,6 +22,7 @@ public class TimeRecord extends RealmObject {
     public int endHour;
     public int endMinute;
     public String subject;
+    public long length;
 
 
 }
